@@ -9,7 +9,6 @@ import {
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import {
-  IRawNotification,
   useNotificationManager,
 } from "../../lib/NotificationManager/NotificationManager";
 import CategoryRow from "./CategoryRow";
@@ -18,7 +17,7 @@ import AddCategoryForm from "./AddCategoryForm";
 export default function Categories() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  
   const notificationManager = useNotificationManager();
 
   useEffect(() => {

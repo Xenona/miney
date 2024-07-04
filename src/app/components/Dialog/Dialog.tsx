@@ -12,7 +12,7 @@ export default function Dialog({ close, children }: IDialogProps) {
   useEffect(() => {
     dialogRef.current?.showModal();
   }, [dialogRef]);
-  
+
   return (
     <dialog
       ref={dialogRef}
@@ -25,5 +25,30 @@ export default function Dialog({ close, children }: IDialogProps) {
     >
       {children}
     </dialog>
+  );
+}
+
+interface IDefaultButtons {
+  accept: () => void;
+  reject: () => void;
+  children?: React.ReactNode;
+}
+
+export const stylesDialogButton = styles.dialogButton;
+export function DefaultButtons({
+  accept,
+  reject,
+  children,
+}: IDefaultButtons) {
+  return (
+    <div className={styles.dialogButtons}>
+      <button className={styles.dialogButton} onClick={accept}>
+        Proceed
+      </button>
+      <button className={styles.dialogButton} onClick={reject}>
+        Cancel
+      </button>
+      {children && children}
+    </div>
   );
 }

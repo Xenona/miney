@@ -7,6 +7,7 @@ import {
 } from "../../lib/NotificationManager/NotificationManager";
 import { validateNameOrError } from "./AddCategoryForm";
 import styles from "./Categories.module.css";
+import Dialog, { DefaultButtons } from "@/app/components/Dialog/Dialog";
 
 interface ICategoryRowProps {
   category: Category;
@@ -16,6 +17,7 @@ interface ICategoryRowProps {
 export default function CategoryRow({ category, onDelete }: ICategoryRowProps) {
   const notificationManager = useNotificationManager();
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isDelDialogOpened, setIsDelDialogOpened] = useState<boolean>(false);
   const [name, setName] = useState<string>(category.name);
   const nameInput = useInput({ type: "text", initialValue: name });
 
@@ -55,9 +57,21 @@ export default function CategoryRow({ category, onDelete }: ICategoryRowProps) {
       ) : (
         <StaticRow
           startEditing={() => setIsEditing(true)}
-          handleDelete={() => onDelete(category.id, category.name)}
+          handleDelete={() => setIsDelDialogOpened(true)}
         >
           <p>{name}</p>
+          {isDelDialogOpened && (
+            <Dialog close={() => setIsDelDialogOpened(false)}>
+              <p>{`Are you sure you want to delete category ${category.name}`}</p>
+              <DefaultButtons
+                accept={() => {
+                  onDelete(category.id, category.name);
+                  setIsDelDialogOpened(false);
+                }}
+                reject={() => setIsDelDialogOpened(false)}
+                />
+            </Dialog>
+          )}
         </StaticRow>
       )}
     </div>
@@ -72,15 +86,17 @@ interface IStaticRowProps {
 
 function StaticRow({ children, startEditing, handleDelete }: IStaticRowProps) {
   return (
-    <div className={styles.row}>
-      <div>{children}</div>
-      <div>
-        <button onClick={startEditing}>🖉</button>
+    <>
+      <div className={styles.row}>
+        <div>{children}</div>
+        <div>
+          <button onClick={startEditing}>🖉</button>
+        </div>
+        <div>
+          <button onClick={() => handleDelete()}>🗑</button>
+        </div>
       </div>
-      <div>
-        <button onClick={handleDelete}>🗑</button>
-      </div>
-    </div>
+    </>
   );
 }
 
