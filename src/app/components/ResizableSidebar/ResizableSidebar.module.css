@@ -1,0 +1,4 @@
+.resizableSidebar {
+    display: flex;
+    flex-direction: column;
+}
