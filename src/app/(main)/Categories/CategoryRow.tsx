@@ -6,6 +6,7 @@ import {
   useNotificationManager,
 } from "../../lib/NotificationManager/NotificationManager";
 import { validateNameOrError } from "./AddCategoryForm";
+import styles from "./Categories.module.css";
 
 interface ICategoryRowProps {
   category: Category;
@@ -71,7 +72,7 @@ interface IStaticRowProps {
 
 function StaticRow({ children, startEditing, handleDelete }: IStaticRowProps) {
   return (
-    <>
+    <div className={styles.row}>
       <div>{children}</div>
       <div>
         <button onClick={startEditing}>🖉</button>
@@ -79,7 +80,7 @@ function StaticRow({ children, startEditing, handleDelete }: IStaticRowProps) {
       <div>
         <button onClick={handleDelete}>🗑</button>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -95,7 +96,7 @@ function EditingRow({
   cancelEditing,
 }: IEditingRowProps) {
   return (
-    <>
+    <div className={styles.row}>
       <div>{children}</div>
       <div>
         <button onClick={acceptEditing}>✓</button>
@@ -103,6 +104,6 @@ function EditingRow({
       <div>
         <button onClick={cancelEditing}>⨯</button>
       </div>
-    </>
+    </div>
   );
 }
