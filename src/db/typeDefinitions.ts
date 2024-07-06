@@ -10,10 +10,10 @@ type Success<T = any> = {
   data: T;
 };
 
-export function ok<T>(data: T): Success {
+export function Ok<T>(data: T): Success {
   return { "status": "ok", "data": data };
 }
 
-export function err(message: string): Error {
+export function Err(message: string): Error {
   return { status: "error", message: message };
 }

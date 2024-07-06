@@ -1,13 +1,13 @@
 import { Category, updateCategory } from "@/db/category";
 import { useState } from "react";
-import useInput from "../../lib/hooks/useInput";
+import useInput from "../../../lib/hooks/useInput";
 import {
   IRawNotification,
   useNotificationManager,
-} from "../../lib/NotificationManager/NotificationManager";
+} from "../../../lib/NotificationManager/NotificationManager";
 import { validateNameOrError } from "./AddCategoryForm";
 import styles from "./Categories.module.css";
-import Dialog, { DefaultButtons } from "@/app/components/Dialog/Dialog";
+import Dialog, { DefaultButtons } from "@/components/Dialog/Dialog";
 
 interface ICategoryRowProps {
   category: Category;
@@ -39,7 +39,7 @@ export default function CategoryRow({ category, onDelete }: ICategoryRowProps) {
       // res.status === "error";
       notificationManager.addNotification({
         type: "Error",
-        body: "Could not update the category name.",
+        body: "Could not update the category name. Try again.",
         devInfo: res.message,
       });
     }

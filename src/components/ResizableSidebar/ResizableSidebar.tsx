@@ -1,6 +1,6 @@
 'use client'
 import styles from "./ResizableSidebar.module.css";
-import { useNotificationManager } from "@/app/lib/NotificationManager/NotificationManager";
+import { useNotificationManager } from "@/lib/NotificationManager/NotificationManager";
 
 export interface IResizableSidebarProps {
   children?: React.ReactNode;

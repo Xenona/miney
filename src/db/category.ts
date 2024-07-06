@@ -2,17 +2,17 @@
 import { eq } from "drizzle-orm";
 import db from "./drizzle";
 import { category } from "./schema";
-import { Result, err, ok } from "./typeDefinitions";
+import { Result, Err, Ok } from "./typeDefinitions";
 import { RunResult } from "better-sqlite3";
 
 export type Category = typeof category.$inferSelect;
 
 export async function getCategories(): Promise<Result<Category[]>> {
-  try { 
+  try {
     const result = await db.select().from(category);
-    return ok(result);
+    return Ok(result);
   } catch (e: any) {
-    return err(e.toString());
+    return Err(e.toString());
   }
 }
 
@@ -23,19 +23,19 @@ export async function addCategory(name: string): Promise<Result<Category>> {
       name: category.name,
     });
 
-    return ok(result[0]);
+    return Ok(result[0]);
   } catch (e: any) {
-    return err(e.toString());
+    return Err(e.toString());
   }
 }
 
 export async function deleteCategory(id: number): Promise<Result<RunResult>> {
+  // TODO: think about moving paymets to some 'empty' category if their cat was deleted
   try {
     const result = await db.delete(category).where(eq(category.id, id));
-
-    return ok(result);
+    return Ok(result);
   } catch (e: any) {
-    return err(e.toString());
+    return Err(e.toString());
   }
 }
 
@@ -49,8 +49,8 @@ export async function updateCategory(
       .set({ name })
       .where(eq(category.id, id))
       .returning({ id: category.id, name: category.name });
-    return ok(result[0]);
+    return Ok(result[0]);
   } catch (e: any) {
-    return err(e.toString());
+    return Err(e.toString());
   }
 }

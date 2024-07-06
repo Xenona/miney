@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Notifications } from "./lib/NotificationManager/NotificationManager";
-import ResizableSidebar from "./components/ResizableSidebar/ResizableSidebar";
+import { Notifications } from "../lib/NotificationManager/NotificationManager";
+import ResizableSidebar from "../components/ResizableSidebar/ResizableSidebar";
+import { Header } from "@/components/Header/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,7 +17,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Notifications>
-          <div>{children}</div>
+          <div>
+            <Header />
+            {children}
+          </div>
           <ResizableSidebar />
         </Notifications>
       </body>

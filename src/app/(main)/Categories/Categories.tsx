@@ -6,11 +6,11 @@ import {
   deleteCategory,
   getCategories,
 } from "@/db/category";
-import { useEffect, useState } from "react";
-import Loading from "../../components/Loading/Loading";
+import { Suspense, useEffect, useState } from "react";
+import Loading from "../../../components/Loading/Loading";
 import {
   useNotificationManager,
-} from "../../lib/NotificationManager/NotificationManager";
+} from "../../../lib/NotificationManager/NotificationManager";
 import CategoryRow from "./CategoryRow";
 import AddCategoryForm from "./AddCategoryForm";
 
@@ -70,13 +70,13 @@ export default function Categories() {
         <Loading />
       ) : (
         <div>
-          {categories.map((c) => (
+          {categories.length ? categories.map((c) => (
             <CategoryRow
               key={c.id}
               category={c}
               onDelete={handleDeleteCategory}
             />
-          ))}
+          )) : <h4>No categories currently exist. </h4>}
         </div>
       )}
     </article>

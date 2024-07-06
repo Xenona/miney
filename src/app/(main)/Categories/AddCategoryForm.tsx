@@ -1,10 +1,10 @@
 "use client";
 import { Dispatch, SetStateAction, useState } from "react";
-import Form from "../Form/Form";
+import Form from "../../../components/Form/Form";
 import {
   IRawNotification,
   useNotificationManager,
-} from "@/app/lib/NotificationManager/NotificationManager";
+} from "@/lib/NotificationManager/NotificationManager";
 import { addCategory, Category } from "@/db/category";
 
 export function validateNameOrError(rawName: any): string | IRawNotification[] {
