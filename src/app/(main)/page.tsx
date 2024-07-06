@@ -1,17 +1,13 @@
-import Categories from "./Categories/Categories";
-import { ShortAccounts } from "./Accounts";
+import Categories from "../dashboard/Categories/Categories";
+import { ShortAccounts } from "../dashboard/Accounts";
 import { Suspense } from "react";
 import Loading from "@/components/Loading/Loading";
+import Link from "next/link";
 
 export default async function Main() {
   return (
     <>
-      <main>
-        <Categories />
-        <Suspense fallback={<Loading />}>
-          <ShortAccounts />
-        </Suspense>
-      </main>
+      <Link href="/dashboard">Dashboard</Link>
     </>
   );
 }
